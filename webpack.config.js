@@ -16,19 +16,18 @@ module.exports = {
         contentBase: path.resolve(__dirname, 'dist'),
     },
     resolve: {
-        extensions: ['.ts', 'tsx', '.js'],
+        extensions: ['.ts', '.js'],
     },
     module: {
         rules: [
             {
-                test: /\.(ts|js)x$/,
+                test: /\.ts$/,
                 use: [
                     {
                         loader: 'awesome-typescript-loader',
                         options: { configFileName: path.resolve(__dirname, 'tsconfig.json') },
                     } ,
                     'angular2-template-loader',
-                    'angular-router-loader',
                 ],
             },
             {
