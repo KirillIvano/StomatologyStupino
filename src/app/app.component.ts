@@ -1,7 +1,15 @@
-import { Component} from '@angular/core';
- 
+import {Component, EventEmitter, Output, Input} from '@angular/core';
+
 @Component({
     selector: 'my-app',
-    template: `<h2>Hello Angular! Welcome Webpack!</h2>`
+    template: `
+        <div>{{clicks}}</div>
+        <app-header (onChanged)="onChanged($event)"></app-header>
+    `,
 })
-export class AppComponent { }
+export class AppComponent {
+    clicks = 0;
+    onChanged(isIncreased: boolean): void {
+        isIncreased ? this.clicks++ : this.clicks--;
+    }
+}
