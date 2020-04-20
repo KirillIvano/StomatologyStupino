@@ -45,5 +45,7 @@ module.exports = {
         'handle-callback-err': ['error'],
         'max-len': ['warn', {code: 120}],
         'no-console': ['error'],
+
+        '@typescript-eslint/explicit-function-return-type': ['off'], 
     }
 };

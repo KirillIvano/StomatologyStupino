@@ -3,20 +3,15 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-
 module.exports = {
     entry: './src/index.ts',
     output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js',
-    },
-    devServer: {
-        historyApiFallback: true,
-        hotOnly: true,
-        contentBase: path.resolve(__dirname, 'dist'),
+        filename: '[name].js',
+        chunkFilename: '[name].chunk.js',
+        publicPath: '/',
     },
     resolve: {
-        extensions: ['.ts', '.js'],
+        extensions: ['.ts', '.js', '.html'],
         alias: {
             '@': path.resolve(__dirname, './src'),
         },
@@ -28,18 +23,16 @@ module.exports = {
                 use: [
                     {
                         loader: 'awesome-typescript-loader',
-                        options: { configFileName: path.resolve(__dirname, 'tsconfig.json') },
+                        options: {configFileName: path.resolve(__dirname, 'tsconfig.json')},
                     } ,
-                    'angular2-template-loader',
                 ],
             },
             {
                 test: /\.html$/,
                 loader: 'html-loader',
-            },
-            {
-                test: /\.(png|jpe?g|gif|svg)$/,
-                loader: 'url-loader',
+                options: {
+                    esModule: true,
+                }
             },
             {
                 test: /\.(c|le)ss$/,
@@ -55,10 +48,11 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'src/index.html',
+            minify: false,
+            favicon: './src/favicon.svg',
         }),
         new MiniCssExtractPlugin({
             filename: 'main.css',
         }),
     ],
-}
-;
+};
