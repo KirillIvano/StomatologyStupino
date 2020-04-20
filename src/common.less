@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+html, body {
+    min-height: 100vh;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: rgb(255, 255, 255);
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.header {
+    background: rgb(255, 255, 255);
+    height: 100px;
+
+    .headerContent {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo {
+            height: 80px;
+        }
+        .location {
+            font-size: .8rem;
+
+            .locationItem:not(:first-child) {
+                margin-top: 6px;
+            }
+        }
+        .contacts {
+            font-size: .9rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+
+            .phone {
+                display: block;
+                font-weight: bold;
+                color: #333;
+                text-decoration: none;
+                padding-bottom: 2px;
+                border-bottom: 2px solid rgba(255, 55, 55, 0.377);
+            }
+            .email {
+                margin-top: 4px;
+                font-size: .8rem;
+            }
+        }
+    }
+}
+
+.navbar {
+    position: relative;
+    margin-top: 3px;
+
+    background: rgb(255, 255, 255);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, .1);
+
+    .navbarContent {
+        display: flex;
+        justify-content: space-between;
+
+        .navItem {
+            cursor: pointer;
+            text-decoration: none;
+            color: #222;
+            padding: 15px 12px;
+            font-size: 1.1rem;
+        }
+    }
+
+    .slider {
+        position: absolute;
+        bottom: 8px;
+
+        height: 3px;
+        width: 0px;
+
+        background: #333;
+        transition: .7s cubic-bezier(.74,-0.36,.47,.89);
+    }
+}
+.navbar::before {
+    content: "";
+    position: absolute;
+    
+    left: 10%;
+    top: -4px;
+    width: 80%;
+    height: 5px;
+
+    background: rgb(56, 56, 56);
+}
+
+@media all and (max-width: 600px) {
+    .header {    
+        .headerContent {    
+            .logo {
+                height: 50px;
+            }
+            .location {
+                display: none;
+            }
+        }
+    }    
+
+    .navbar {
+        .navbarContent {
+            display: flex;
+            justify-content: space-between;
+    
+            .navItem {
+                font-size: .9rem;
+                padding: 8px 6px;
+            }
+        }
+        
+        .slider {
+            bottom: 2px;
+        }
+    }
+
+    .navbar::before {        
+        height: 1px;
+        background: rgb(143, 143, 143);
+    }
+
+    html {
+        font-size: 14px;
+    }
+}
