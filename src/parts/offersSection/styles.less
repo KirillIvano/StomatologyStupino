@@ -1,0 +1,45 @@
+.offers {
+    background: white;
+
+    .offersContent {
+        color: #333;
+        padding: 30px;
+
+        .headline {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .offerItem {
+            display: flex;
+            padding: 16px;
+            cursor: pointer;
+
+            transition: .5s;
+
+            .icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .offerInfo {
+                margin-left: 16px;
+
+                .offerName {
+                    font-size: 1.1rem;
+                    font-weight: bold;
+                    fill: rgb(0, 136, 57);
+                }
+
+                .offerDescription {
+                    font-size: .8rem;
+                    color: #666;
+                }
+            }
+        }
+
+        .offerItem:hover {
+            background: #ddd;
+        }
+    }
+}
