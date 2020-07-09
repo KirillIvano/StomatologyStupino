@@ -1,14 +1,24 @@
-import {OfferCategoryType} from '@/entities/offer';
+import {jsonFetch} from '@/helpers/jsonFetch';
+import {generateApiUrl} from '@/helpers/generateApiUrl';
 
-export const getOfferByType =
-    (type: string) => fetch(
-        `http://194.67.113.29:5000/offer/category/${type}`,
-    ).then(
-        res => res.json() as Promise<{
-            offerCategory: OfferCategoryType;
-            error?: undefined;
-        } | {
-            offerCategory?: undefined;
-            error: string;
-        }>,
+import {OfferCategoryDto, OfferDto, OfferPreviewDto} from './dto/offers.dto';
+
+export const getOfferPreviews = () =>
+    jsonFetch<{previews: OfferPreviewDto[]}>(
+        generateApiUrl('/offer/preview'),
+    );
+
+export const getOfferCategories = () =>
+    jsonFetch<{categories: OfferCategoryDto[]}>(
+        generateApiUrl('/offer/category/all'),
+    );
+
+export const getOfferInfo = (id: number) =>
+    jsonFetch<{}>(
+        generateApiUrl(`/offer/${id}`),
+    );
+
+export const getOffersByCategory = (categoryId: string) =>
+    jsonFetch<{offers: OfferDto[]; name: string}>(
+        generateApiUrl(`/offer/category/${categoryId}/offers`),
     );

@@ -1,6 +1,10 @@
-const navbar = document.getElementsByClassName('navbar')[0] as HTMLDivElement;
 let navBarSlider: HTMLDivElement;
 let selectedAnchor: HTMLAnchorElement = null;
+
+const navbar = document.getElementsByClassName('navbar')[0] as HTMLDivElement;
+const links = Array.prototype.slice.call(
+    navbar.getElementsByTagName('a'),
+) as HTMLAnchorElement[];
 
 const moveSliderToAnchor = (a: HTMLAnchorElement): void => {
     const {width: sliderWidth, left: sliderOffset} = a.getBoundingClientRect();
@@ -21,18 +25,18 @@ const navbarClickHandler = (e: MouseEvent): void => {
     moveSliderToAnchor(currentNode as HTMLAnchorElement);
 };
 
-export const initializeSlider = (): void => {
+const updateSlider = () => {
     const route = location.pathname;
-
-    const links = Array.prototype.slice.call(
-        navbar.getElementsByTagName('a'),
-    ) as HTMLAnchorElement[];
-
-    navBarSlider = document.createElement('div');
-    navBarSlider.classList.add('slider');
 
     selectedAnchor = links.find(({dataset}) => route === dataset.route);
     selectedAnchor && moveSliderToAnchor(selectedAnchor);
+};
+
+export const initializeSlider = (): void => {
+    navBarSlider = document.createElement('div');
+    navBarSlider.classList.add('slider');
+
+    updateSlider();
 
     navbar.appendChild(navBarSlider);
     navbar.addEventListener('click', navbarClickHandler);

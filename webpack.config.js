@@ -1,7 +1,6 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
 
 module.exports = {
     entry: './src/index.ts',
@@ -13,7 +12,7 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.js', '.html'],
         alias: {
-            '@': path.resolve(__dirname, './src'),
+            '@': path.resolve(__dirname, 'src'),
         },
     },
     module: {
@@ -34,15 +33,6 @@ module.exports = {
                     esModule: true,
                 }
             },
-            {
-                test: /\.(c|le)ss$/,
-                exclude: path.resolve(__dirname, 'src/app'),
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'less-loader',
-                ],
-            },
         ],
     },
     plugins: [
@@ -51,8 +41,8 @@ module.exports = {
             minify: false,
             favicon: './src/favicon.svg',
         }),
-        new MiniCssExtractPlugin({
-            filename: 'main.css',
-        }),
+        new webpack.DefinePlugin({
+            SERVER_ORIGIN: "'http://127.0.0.1:5000'"
+        })
     ],
 };

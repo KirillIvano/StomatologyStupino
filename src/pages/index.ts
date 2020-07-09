@@ -44,7 +44,7 @@ const contactsPageConfig: RouteConfig = {
 };
 
 const offerPageConfig: RouteConfig = {
-    path: /\/offers\/(.+)/,
+    path: /\/category\/(.+)/,
     getPage: () =>
         import(
             /* webpackChunkName: "offers-page" */

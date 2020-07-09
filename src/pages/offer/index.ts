@@ -1,69 +1,54 @@
 import {Page} from '@/entities/pages';
-import {OfferType, OfferCategoryType} from '@/entities/offer';
-import {getOfferByType} from '@/services/offers';
+import {getOffersByCategory} from '@/services/offers';
 import {contactsPartConfig} from '@/parts';
 
 import './styles.less';
 import {createDebouncer} from './helpers';
+import {getFilteredOffersView} from './components/offer';
+import {getOfferCategoryView} from './components/offerCategory';
+import {OfferType} from '@/entities/offer';
 
-const createOfferTemplate = ({
-    name,
-    price,
-}: OfferType) => (
-    `<div class="offer">
-        <p class="offerName">${name}</p>
-        <p class="offerPrice">${price}р</p>
-    </div>`
-);
+const addFilter = (parent: HTMLElement, offers: OfferType[]) => {
+    const categoryItemsEl = parent.getElementsByClassName('offerCategoryItems')[0] as HTMLDivElement;
 
-const createFilteredOffersTemplate = (offers: OfferType[], filterVal) => offers.reduce(
-    (acc, offer) => offer.name.includes(filterVal) ? acc + createOfferTemplate(offer) : acc,
-    '',
-);
-const createAllOffersTemplate = (offers: OfferType[]) =>
-    offers.reduce((acc, offer) => acc + createOfferTemplate(offer), '');
+    const inputDebouncer = createDebouncer(200);
+    const searchInput = parent.getElementsByClassName('offerSearch')[0] as HTMLInputElement;
 
-const createOfferCategoryTemplate = ({
-    name,
-    offers,
-}: OfferCategoryType): string => (
-    `<div class="offerCategory container">
-        <h1 class="offerCategoryName">${name}</h1>
-        <input placeholder="Найти услугу..." class="offerSearch" type="text" />
-        <div class="offerCategoryItems">
-            ${createAllOffersTemplate(offers)}
-        </div>
-    </div>`
-);
+    const searchBarInputHandler = () => inputDebouncer.perform(() => {
+        categoryItemsEl.innerHTML = getFilteredOffersView(offers, searchInput.value);
+    });
+
+    searchInput.addEventListener(
+        'input',
+        searchBarInputHandler,
+    );
+};
 
 const page: Page = {
     content: '<section data-part="contacts"></section>',
     parts: [contactsPartConfig],
-    handleContentLoad(parent, [offerType]) {
-        getOfferByType(offerType).then(({offerCategory, error}) => {
-            if (error) {
-                parent.innerText = error;
-            }
 
-            parent.insertAdjacentHTML('afterbegin', createOfferCategoryTemplate(offerCategory));
+    async handleContentLoad(parent, [offerType]) {
+        const offersRes = await getOffersByCategory(offerType);
 
-            const categoryItemsEl = parent.getElementsByClassName('offerCategoryItems')[0] as HTMLDivElement;
+        if (offersRes.ok === false) {
+            parent.innerHTML = offersRes.error;
+            return;
+        }
 
-            const inputDebouncer = createDebouncer(200);
-            const searchInput = parent.getElementsByClassName('offerSearch')[0] as HTMLInputElement;
-            const {offers} = offerCategory;
+        const {offers, name} = offersRes.data;
 
-            const searchBarInputHandler = () => inputDebouncer.perform(() => {
-                categoryItemsEl.innerHTML = createFilteredOffersTemplate(offers, searchInput.value);
-            });
+        const clientifiedOffers = offers.map(offer => ({
+            ...offer,
+            id: String(offer.id),
+        }));
 
-            searchInput.addEventListener(
-                'input',
-                searchBarInputHandler,
-            );
+        parent.insertAdjacentHTML('afterbegin', getOfferCategoryView({
+            name,
+            offers: clientifiedOffers,
+        }));
 
-            return () => searchInput.removeEventListener('input', searchBarInputHandler);
-        });
+        addFilter(parent, clientifiedOffers);
     },
 };
 

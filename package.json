@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prod": "webpack --config webpack.prod.js",
-    "dev": "webpack --config webpack.dev.js"
+    "dev": "npx webpack-dev-server --config ./webpack.dev.js"
   },
   "author": "",
   "license": "ISC",
@@ -34,6 +34,7 @@
     "typescript": "^3.7.5",
     "url-loader": "^4.0.0",
     "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.10.3",
     "webpack-merge": "^4.2.2"
   },

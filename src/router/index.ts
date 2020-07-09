@@ -29,6 +29,7 @@ class Router {
         this.navigate(location.pathname);
         this.listenUpdates();
     }
+
     // draw page parts
     private async executeParts(partsConfigs: PagePartConfig[], params?: object) {
         return Promise.all(
@@ -38,12 +39,13 @@ class Router {
 
                     const {partName, content, handlePartLoad} = part;
 
-                    const partContainer = this.parent.querySelector(`[data-part="${partName}"]`);
+                    const partContainer = this.parent.querySelector(`[data-part="${partName}"]`) as HTMLElement;
                     if (!partContainer) return;
-                    partContainer.outerHTML = content;
+
+                    partContainer.innerHTML = content;
 
                     if (handlePartLoad) {
-                        const handlePartUnload = await handlePartLoad(this.parent, params);
+                        const handlePartUnload = await handlePartLoad(partContainer, params);
 
                         if (handlePartUnload) {
                             this.handleContentUnload = () => {
@@ -56,6 +58,7 @@ class Router {
             ),
         );
     }
+
     // create links for the rest of the document
     private createInitialLinks(): void {
         const commonLinks = Array.prototype.slice.call(
@@ -146,7 +149,7 @@ class Router {
         }
     }
 
-    async navigate(path): Promise<void> {
+    async navigate(path: string): Promise<void> {
         if (!this.isInitialized) throw new Error('Router is not initialized');
         if (this.currentPath === path) return;
 
