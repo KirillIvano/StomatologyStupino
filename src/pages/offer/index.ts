@@ -1,12 +1,12 @@
 import {Page} from '@/entities/pages';
 import {getOffersByCategory} from '@/services/offers';
 import {contactsPartConfig} from '@/parts';
+import {OfferType} from '@/entities/offer';
 
 import './styles.less';
 import {createDebouncer} from './helpers';
 import {getFilteredOffersView} from './components/offer';
 import {getOfferCategoryView} from './components/offerCategory';
-import {OfferType} from '@/entities/offer';
 
 const addFilter = (parent: HTMLElement, offers: OfferType[]) => {
     const categoryItemsEl = parent.getElementsByClassName('offerCategoryItems')[0] as HTMLDivElement;
@@ -25,7 +25,9 @@ const addFilter = (parent: HTMLElement, offers: OfferType[]) => {
 };
 
 const page: Page = {
-    content: '<section data-part="contacts"></section>',
+    content: `
+        <div data-part="contacts"></div>
+    `,
     parts: [contactsPartConfig],
 
     async handleContentLoad(parent, [offerType]) {

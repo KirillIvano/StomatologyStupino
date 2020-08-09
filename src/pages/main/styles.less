@@ -6,36 +6,41 @@
 
     .intro {
         position: relative;
-        height: 80vh;
+        height: 90vh;
         transition: height 1s;
 
-        background-image: linear-gradient(0deg, rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url("./images/intro.jpg");
+        background-image: linear-gradient(
+            90deg,
+            rgba(0, 0, 0, .9),
+            rgba(0, 0, 0, .7)
+        ), url("./images/intro.jpg");
         background-position: center, center;
         background-size: cover, cover;
         background-attachment: fixed, fixed;
 
-        .introOverlay {
+        .intro__overlay {
             position: absolute;
             width: 100%;
             height: 100%;
 
-            .introContentWrapper {
+            .intro__wrapper {
                 height: 100%;
 
                 display: flex;
                 align-items: center;
                 padding: 20px;
 
-                .introContent {
+                .intro__content {
                     font-weight: 600;
-                    color: #eee;
+                    color: #ddd;
 
-                    .introHeadline {
+                    .intro__headline {
                         font-size: 3rem;
                     }
 
-                    .introDescription {
-                        font-size: 1.8rem;
+                    .intro__description {
+                        color: #bbb;
+                        font-size: 1.4rem;
                     }
                 }
             }
@@ -43,113 +48,43 @@
     }
 
     .advantages {
-        background: rgb(231, 231, 231);
+        background: rgb(240, 240, 240);
 
         .advantagesContent {
-            padding: 30px;
-
             .advantage {
-                margin-top: 8px;
+                margin-top: 1rem;
+
+                display: flex;
+                align-items: flex-start;
 
                 .itemNumber {
+                    flex: 0 0 50px;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    
+                    width: 50px;
+                    height: 50px;
+
                     font-weight: bold;
                     font-size: 1.1rem;
                     color: rgb(0, 114, 28);
+
+                    border-radius: 50%;
+                    border: 1px solid rgb(0, 114, 28);
                 }
 
                 .itemContent {
+                    padding-top: calc(12px);
+                    padding-left: 2rem;
+                    line-height: 1.5;
                     color: black;
                 }
             }
-        }
-    }
 
-    .employee {
-        background: #eee;
-
-        .employeeContent {
-            padding: 30px;
-
-            .employeeCarousel {
-                position: relative;
-                margin-top: 30px;
-                height: 300px;
-
-                .employeeCarouselControl {
-                    position: absolute;
-                    top: 50%;
-                    margin-top: -20px;
-
-                    width: 25px;
-                    height: 25px;
-                    border-top: 3px solid black;
-                    border-left: 3px solid black;
-
-                    z-index: 10;
-                    cursor: pointer;
-
-                    &.left {
-                        left: -22px;
-                        transform: rotate(-45deg);
-                    }
-
-                    &.right {
-                        right: -20px;
-                        transform: rotate(135deg);
-                    }
-                }
-
-                .employeeCarouselContent {
-                    position: relative;
-                    height: 100%;
-                    display: flex;
-                    align-items: center;
-                    
-                    .employeeCarouselItem {
-                        position: absolute;
-                        top: 0;
-                        left: 6px;
-                        width: 100%;
-
-                        opacity: 0;
-                        pointer-events: none;
-                        transition: opacity .6s ease-in-out;
-
-
-                        .imageContainer {
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            width: 50%;
-
-                            overflow: hidden;
-                            
-                            .image {
-                                display: block;
-                                width: auto;
-                                height: 300px;
-                            }
-                        }
-
-                        .employeeInfo {
-                            padding: 12px;
-                            width: 50%;
-
-                            .employeeName {
-                                font-size: 1.4rem;
-                            }
-
-                            .employeeDescription {
-                                margin-top: 12px;
-                            }
-                        }
-                    }
-
-                    .carouselItem.active {
-                        pointer-events: all;
-                        opacity: 1;
-                    }
-                }
+            .advantage__button {
+                margin-top: 2rem;
             }
         }
     }
@@ -158,7 +93,26 @@
 @media all and (max-width: 600px) {
     .main {
         .intro {
-            background-attachment: scroll, scroll;
+            background-attachment: scroll;
+            height: 40vh;
+
+            .intro__overlay {    
+                .intro__wrapper {
+                    .intro__content {
+                        font-weight: 600;
+                        color: #ddd;
+    
+                        .intro__headline {
+                            font-size: 2rem;
+                        }
+    
+                        .intro__description {
+                            color: #bbb;
+                            font-size: 1.2rem;
+                        }
+                    }
+                }
+            }    
         }
         .employee {
             .employeeContent {

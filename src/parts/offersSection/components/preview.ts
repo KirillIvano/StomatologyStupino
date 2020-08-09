@@ -7,7 +7,7 @@ export const getPreviewView = ({
     image,
     categoryName,
 }: OfferPreviewType & {categoryName: string}) => `
-    <a data-route="/category/${categoryId}" class="offerItem col-xs-12 col-md-6 redirect-link">
+    <a href="/category/${categoryId}" class="offerItem col-xs-12 col-md-6 redirect-link">
         <img class="icon" src="${getImageUrl(image)}" alt="">
         <div class="offerInfo">
             <div class="offerName">${name}</div>

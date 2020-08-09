@@ -1,27 +1,37 @@
-.contactsSection {
+.contacts__part {
     background: #333;
-    padding: 20px 16px;
-
-    .contactsContent {
-        .contactsInfo {
+    padding: 2rem 0;
+    .contacts__layout {
+        .contacts__info {
             color: #eee;
             text-align: right;
             width: 100%;
             padding: 16px;
-
-            .contactsInfoHeadline {
+    
+            .contacts__info__headline {
                 font-size: 1.4rem;
                 margin-top: 12px;
             }
-            .contactsInfoContent {
+            .contacts__info__paragraph {
                 color: #ccc;
                 margin-top: 6px;
             }
         }
-
-        .map {
-            padding: 20px 16px;
+    
+        .contacts__map {
             display: block;
+        }
+    }
+}
+
+@media all and (max-width: 600px) {
+    .contacts__part {
+        .contacts__layout {
+            flex-wrap: wrap-reverse;
+
+            .contacts__map {
+                height: 300px;
+            }
         }
     }
 }

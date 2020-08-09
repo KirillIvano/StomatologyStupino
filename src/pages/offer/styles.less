@@ -22,16 +22,44 @@
             padding: 16px;
             border-radius: 6px;
             background: #eee;
-            display: flex;
-            justify-content: space-between;
 
-            .offerName {
-                font-weight: bold;
+            .offer__head {
+                display: flex;
+                justify-content: space-between;
+    
+                .offer__name {
+                    flex: 1 1 auto;
+                    font-size: .825rem;
+                    font-weight: bold;
+                }
+    
+                .offer__price {
+                    flex: 0 0 120px;
+                    text-align: center;
+                    color: rgb(4, 119, 0);
+                }    
             }
-            .offerPrice {
-                flex: 0 0 120px;
-                text-align: center;
-                color: rgb(4, 119, 0);
+
+            .offer__description {
+                margin-top: 1rem;
+                color: #666;
+
+                font-size: .825rem;;
+                line-height: 1.5;
+            }
+        }
+    }
+}
+
+@media all and (max-width: 600px) {
+    .offerCategory {
+        .offerCategoryItems {
+            .offer {
+                .offer__head {        
+                    .offer__price {
+                        flex: 0 0 80px;
+                    }    
+                }
             }
         }
     }

@@ -2,6 +2,7 @@ export type OfferType = {
     id: string;
     name: string;
     price: number;
+    description?: number;
 }
 
 export type OfferCategoryType = {

@@ -20,5 +20,7 @@ export const getOfferInfo = (id: number) =>
 
 export const getOffersByCategory = (categoryId: string) =>
     jsonFetch<{offers: OfferDto[]; name: string}>(
-        generateApiUrl(`/offer/category/${categoryId}/offers`),
+        generateApiUrl(
+            categoryId !== 'all' ? `/offer/category/${categoryId}` : '/offer/all',
+        ),
     );

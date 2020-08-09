@@ -1,6 +1,5 @@
 import 'flexboxgrid2';
 import 'babel-polyfill';
-import 'fetch-polyfill';
 
 import {pagesConfigs} from './pages';
 

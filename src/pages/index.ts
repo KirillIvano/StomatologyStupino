@@ -16,7 +16,7 @@ const offersPageConfig: RouteConfig = {
     getPage: () =>
         import(
             /* webpackChunkName: "offers-page" */
-            /* webpackMode: "lazy" */
+            /* webpackMode: "eager" */
             './offers').then(
             res => res.default,
         ),
