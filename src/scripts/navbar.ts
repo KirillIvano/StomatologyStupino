@@ -6,10 +6,11 @@ const links = Array.prototype.slice.call(
     navbar.getElementsByTagName('a'),
 ) as HTMLAnchorElement[];
 
+
 const moveSliderToAnchor = (a: HTMLAnchorElement): void => {
     const {width: sliderWidth, left: sliderOffset} = a.getBoundingClientRect();
 
-    navBarSlider.style.transform = `translate(${sliderOffset}px)`;
+    navBarSlider.style.transform = `translateX(${sliderOffset}px)`;
     navBarSlider.style.width = `${sliderWidth}px`;
 };
 
@@ -21,7 +22,8 @@ const navbarClickHandler = (e: MouseEvent): void => {
         currentNode = currentNode.parentElement;
     }
 
-    selectedAnchor = currentNode as HTMLAnchorElement;+
+    selectedAnchor = currentNode as HTMLAnchorElement;
+
     moveSliderToAnchor(currentNode as HTMLAnchorElement);
 };
 
@@ -34,7 +36,7 @@ const updateSlider = () => {
 
 export const initializeSlider = (): void => {
     navBarSlider = document.createElement('div');
-    navBarSlider.classList.add('slider');
+    navBarSlider.classList.add('navbar__slider');
 
     updateSlider();
 
