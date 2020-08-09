@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const webpack = require('webpack');
 
 module.exports = {
@@ -39,10 +40,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'src/index.html',
             minify: false,
-            favicon: './src/favicon.svg',
+            favicon: './src/favicon.svg'
         }),
         new webpack.DefinePlugin({
-            SERVER_ORIGIN: "'http://127.0.0.1:5000'"
+            SERVER_ORIGIN: "'https://api.mkdentalst.ru'"
         })
     ],
 };
